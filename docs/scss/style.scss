@@ -1,0 +1,126 @@
+html, body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  perspective: 20em;
+  background: #F1E6D9;
+  transform: translateZ(0)
+}
+@keyframes rotate{
+  0%,10%{
+    transform:
+      rotateX(70deg)
+      rotateZ(45deg);
+  }
+  25%,35%{
+    transform:
+      rotateX(70deg)
+      rotateZ(135deg);
+  }
+  50%,65%{
+    transform:
+      rotateX(70deg)
+      rotateZ(225deg);
+  }
+  75%,85%{
+    transform:
+      rotateX(70deg)
+      rotateZ(315deg);
+  }
+  100%{
+    transform:
+      rotateX(70deg)
+      rotateZ(405deg);
+  }
+}
+@keyframes jump{
+  0%, 90%, 100%{
+    transform: translateY(-10vh);
+  }
+  40%{
+    transform: translateY(30vh);
+  }
+}
+@keyframes scale{
+  0%, 10%, 70%, 100%{
+    transform: scaleY(1);
+  }
+  50%{
+    transform: scaleY(.4);
+  }
+}
+.jump {
+  animation:
+    jump 1s
+    cubic-bezier(0.785, 0.135, 0.150, 0.860)
+    infinite;
+  transform-style: preserve-3d;
+}
+.scale{
+  animation:
+    scale 1s
+    cubic-bezier(0.785, 0.135, 0.150, 0.860)
+    infinite;
+  transform-style: preserve-3d;
+  transform-origin: 100% 100% 0;
+}
+.cube{
+  width: 4em;
+  height: 4em;
+  animation:
+    rotate 4s .5s
+    cubic-bezier(0.645, 0.045, 0.355, 1.000)
+    infinite
+    reverse;
+  transform:
+      rotateX(70deg)
+      rotateZ(45deg);
+  transform-style: preserve-3d;
+  &:after, &:before{
+    content: "";
+    will-change: transform;
+    display: block;
+    width: 4em;
+    height: 4em;
+    background: #333;
+    position: absolute;
+  }
+  &:before{
+    transform: translateZ(4em);
+  }
+}
+.face{
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  background: rgba(0,0,0,.4);
+  transform-style: preserve-3d;
+  &:nth-child(1){
+    transform: rotateX(90deg);
+    transform-origin: 50% 0;
+    background: #F7CB53;
+  }
+  &:nth-child(2){
+    transform:
+      rotateX(90deg)
+      translateZ(-4em);
+    transform-origin: 50% 0;
+    background: #E35941;
+  }
+  &:nth-child(3){
+    transform:
+      rotateX(90deg)
+      rotateY(-90deg);
+    transform-origin: 100% 0;
+    background: #289EAA;
+  }
+  &:nth-child(4){
+    transform:
+      rotateX(90deg)
+      rotateY(-90deg)
+      translateZ(4em);
+    transform-origin: 100% 0;
+    background: #C3DB6D;
+  }
+}
